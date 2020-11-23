@@ -1,0 +1,59 @@
+<div class="row mt-5 justify-content-center">
+	<div class="col-xl-3">
+
+		<div class="card">
+			<div class="card-header">
+				<h3>Login</h3>
+			</div>
+			<div class="card-body">
+				<form v-on:submit.prevent="login">
+					<div class="form-group pb-2">
+						<label for="email">Email</label>
+						<input v-model="email" class="form-control" type="email" name="email" id="email" value="" placholder="person@example.com" required/>
+					</div>
+					<div class="form-group pb-2">
+						<div class="d-flex justify-content-between">
+							<label for="password">Password</label>
+							<small><a class="disabled" href="#">Forgot Password?</a></small>
+						</div>
+						<input v-model="password" class="form-control" type="password" name="password" id="password" value="" placholder="password" required/>
+					</div>
+					<input class="btn btn-primary w-100 my-3" type="submit" name="login" id="login" value="Login" />
+				</form>
+			</div>
+			<div class="card-footer text-center">
+					<a href="#" data-toggle="modal" data-target="#register-modal">Create Account</a>
+			</div>
+		</div>
+
+		<div id="register-modal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-light">
+						<h5>Register</h5>
+						<button type="button" class="close" data-dismiss="modal">
+							<span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input v-model="registerEmail" class="form-control" type="email" name="register-email" id="register-email" placholder="person@example.com" required/>
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input v-model="registerPassword" class="form-control" type="password" name="register-password" id="register-password" placholder="password" required/>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer bg-light">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						<button v-on:click="register" class="btn btn-primary" type="button">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

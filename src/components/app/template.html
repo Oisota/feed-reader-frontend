@@ -1,0 +1,18 @@
+<main role="main">
+
+	<nav-bar></nav-bar>
+
+	<div class="container-fluid">
+		<router-view></router-view>
+	</div>
+
+	<notifications position="top right">
+		<template slot="body" slot-scope="props">
+			<div class="alert" v-bind:class="props.item.type" role="alert">
+				<strong>{{props.item.title}}</strong>
+				<p>{{props.item.text}}</p>
+			</div>
+		</template>
+	</notifications>
+
+</main>

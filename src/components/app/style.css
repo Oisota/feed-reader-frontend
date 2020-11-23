@@ -1,0 +1,7 @@
+html, body, main {
+	height: 100%;
+}
+
+.container-fluid {
+	height: calc(100vh - 3.5rem)
+}
