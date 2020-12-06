@@ -1,15 +1,9 @@
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-	<router-link class="navbar-brand" to="/">Feed Reader</router-link>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav">
-			<li class="nav-item" v-if="hasRole('admin')">
-				<router-link class="nav-link" v-bind:to="{name: 'admin'}">Admin</router-link>
-			</li>
-		</ul>
-		<button v-if="loggedIn" v-on:click="logout" class="btn btn-outline-secondary ml-auto" type="button">Logout</button>
+<nav class="flex flex-row justify-between items-center bg-blue-900 p-3">
+	<div class="flex flex-row justify-start items-center">
+		<router-link class="text-gray-100 font-medium text-lg mr-7" to="/">Feed Reader</router-link>
+		<router-link class="text-gray-200 mx-2" v-bind:to="{name: 'feeds'}">Feeds</router-link>
+	</div>
+	<div class="flex flex-row justify-end">
+	<button v-on:click="logout" class="text-gray-200 border border-gray-200 rounded p-1" type="button">Logout</button>
 	</div>
 </nav>

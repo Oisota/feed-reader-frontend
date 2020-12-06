@@ -14,10 +14,8 @@
 		],
 		"baseUrl": "./",
 		"paths": {
-			"jquery": ["jquery/dist/jquery.slim.js"],
 			"App/*": ["src/*"],
 			"Components/*": ["src/components/*"],
-			"assets/*": ["assets/*"]
 		}
 	}
 }

@@ -3,7 +3,7 @@ const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	output: {
@@ -26,10 +26,8 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.json', '.ts'],
 		alias: {
-			'jquery': 'jquery/dist/jquery.slim.js',
 			'App': path.resolve(__dirname, 'src/'),
 			'Components': path.resolve(__dirname, 'src/components'),
-			'assets': path.resolve(__dirname, './assets'),
 		}
 	},
 	module: {
@@ -61,7 +59,9 @@ module.exports = {
 				test: /\.css$/,
 				use: [
 					'vue-style-loader',
-					'css-loader'
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					'postcss-loader',
 				]
 			},
 		]
@@ -73,5 +73,6 @@ module.exports = {
 			title: 'Feed Reader',
 			template: './src/html/index.html',
 		}),
+		new MiniCssExtractPlugin(),
 	],
 };
