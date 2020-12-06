@@ -1,9 +1,11 @@
 import LoginView from './login-view';
-import MainView from './main-view';
+import FeedView from './feed-view';
+import SubscriptionView from './subscription-view';
 import NotFoundView from './not-found-view';
 
 export default {
 	LoginView,
-	MainView,
+	FeedView,
+	SubscriptionView,
 	NotFoundView
 };

@@ -5,53 +5,50 @@ import { ResponsePromise } from 'ky';
 import { RootState } from '../state';
 import http from 'App/http';
 
-interface Song {
+interface FeedItem {
 	id: number;
-	name: string;
-	artist: string;
-	album: string;
-	genre: string;
-	length: number;
+	title: string;
+	pubDate: Date;
+	url: string;
+	feedTitle: string;
+	feedUrl: string;
+	saved: boolean;
 }
 
 export interface State {
-	songs: Array<Song>;
+	feed: Array<FeedItem>;
 }
 
 export const namespaced = true;
 
 export const state: State = {
-	songs: [],
+	feed: [],
 };
 
 export const mutations: MutationTree<State> = {
-	load(state, songs) {
-		state.songs = songs;
+	load(state, payload) {
+		state.feed = payload.feed;
 	},
 	update(state, payload) {
-		state.songs.splice(payload.index, 1, payload);
-	},
-	create(state, payload) {
-		state.songs.push(payload);
+		state.feed.splice(payload.index, 1, payload.item);
 	},
 	delete(state, payload) {
-		state.songs.splice(payload.index, 1);
+		state.feed.splice(payload.index, 1);
 	},
 };
 
 export const actions: ActionTree<State, RootState> = {
 	async load(context): Promise<Response> {
 		let resp: Response = Response.error();
-		const userID = context.rootState.user.user.id;
 		try {
-			resp = await http.get(`users/${userID}/songs`);
+			resp = await http.get('posts');
 		} catch (err) {
 			console.log(err);
 			return resp;
 		}
 		const data: any = await resp.json();
 		if (data && data.data) {
-			context.commit('load', data.data);
+			context.commit('load', { feed: data.data});
 		}
 		return resp;
 	},
@@ -71,22 +68,6 @@ export const actions: ActionTree<State, RootState> = {
 		}
 		context.commit('update', s);
 		return resp;
-	},
-	async create(context, payload) {
-		let resp = Response.error();
-		const userID = context.rootState.user.user.id;
-		try {
-			resp = await http.post(`users/${userID}/songs`, {
-				json: payload,
-			});
-		} catch (err) {
-			console.log(err);
-		}
-		const data = (await resp.json() as any).data;
-		payload.id = data.id;
-		const s = Object.assign({}, payload);
-		context.commit('create', s);
-		return s;
 	},
 	async delete(context, payload) {
 		let resp = Response.error();

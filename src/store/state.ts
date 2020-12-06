@@ -1,7 +1,7 @@
 import { State as UserState } from './modules/user';
-import { State as SongsState } from './modules/songs';
+import { State as FeedState } from './modules/feed';
 
 export interface RootState {
 	user: UserState;
-	songs: SongsState;
+	feed: FeedState;
 }

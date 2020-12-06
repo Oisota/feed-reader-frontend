@@ -1,7 +1,7 @@
 <nav class="flex flex-row justify-between items-center bg-blue-900 p-3">
 	<div class="flex flex-row justify-start items-center">
-		<router-link class="text-gray-100 font-medium text-lg mr-7" to="/">Feed Reader</router-link>
-		<router-link class="text-gray-200 mx-2" v-bind:to="{name: 'feeds'}">Feeds</router-link>
+		<router-link class="text-gray-100 font-medium text-lg mr-7" v-bind:to="{name: 'home'}">Feed Reader</router-link>
+		<router-link class="text-gray-200 mx-2" v-bind:to="{name: 'subscriptions'}">Feeds</router-link>
 	</div>
 	<div class="flex flex-row justify-end">
 	<button v-on:click="logout" class="text-gray-200 border border-gray-200 rounded p-1" type="button">Logout</button>

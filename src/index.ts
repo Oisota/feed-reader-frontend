@@ -8,7 +8,7 @@ import config from './config';
 
 (async () => {
 
-	await store.dispatch('user/load');
+	//await store.dispatch('user/load');
 
 	const app = new Vue({
 		el: '#app',

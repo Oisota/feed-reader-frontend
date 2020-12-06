@@ -13,9 +13,18 @@ const router = new VueRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: pages.MainView,
+			component: pages.FeedView,
 			meta: {
-				title: 'Posts',
+				title: 'Feed',
+				role: Role.USER,
+			}
+		},
+		{
+			path: '/subscriptions',
+			name: 'subscriptions',
+			component: pages.SubscriptionView,
+			meta: {
+				title: 'Feeds',
 				role: Role.USER,
 			}
 		},
@@ -42,6 +51,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from_, next) => {
 	document.title = `Feed Reader | ${to.meta.title}`;
+	next();
 	/*
 	const loggedIn = store.getters['user/loggedIn'];
 	const hasRole = store.state.user.user.role <= to.meta.role;
