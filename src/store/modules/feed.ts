@@ -5,7 +5,7 @@ import { ResponsePromise } from 'ky';
 import { RootState } from '../state';
 import http from 'App/http';
 
-interface FeedItem {
+export interface FeedItem {
 	id: number;
 	title: string;
 	pubDate: Date;
