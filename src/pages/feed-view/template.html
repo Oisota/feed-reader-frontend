@@ -1,12 +1,6 @@
 <section class="container mx-auto xl:w-1/2 md:w-3/4 sm:w-full">
 
-	<nav class="flex flex-row justify-between items-center mt-2" role="navigation" aria-label="pagination">
-		<span>Page {{page}}</span>
-		<span>
-			<button v-on:click="prev" class="mr-1 py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Previous</button>
-			<button v-on:click="next" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Next</button>
-		</span>
-	</nav>
+	<page-nav v-bind:page="page" v-on:next="next" v-on:prev="prev"></page-nav>
 
 	<article v-for="(item, index) in feed" class="bg-white p-2 my-3 shadow rounded-md">
 		<div class="flex flex-row justify-between">
@@ -31,12 +25,6 @@
 
 	</article>
 
-	<nav class="flex flex-row justify-between pb-2" role="navigation" aria-label="pagination">
-		<span>Page {{page}}</span>
-		<span>
-			<button v-on:click="prev" class="mr-1 py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Previous</button>
-			<button v-on:click="next" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Next</button>
-		</span>
-	</nav>
+	<page-nav v-bind:page="page" v-on:next="next" v-on:prev="prev"></page-nav>
 
 </section>

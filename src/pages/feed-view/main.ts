@@ -3,12 +3,17 @@ import format from 'date-fns/format';
 
 import { FeedItem } from 'App/store/modules/feed';
 
+import PageNav from 'App/components/page-nav';
+
 interface FormattedFeedItem extends FeedItem {
 	pubDateFormatted: string;
 };
 
 export default Vue.extend({
 	name: 'feed-view',
+	components: {
+		'page-nav': PageNav,
+	},
 	created() {
 		this.loadFeed();
 	},
