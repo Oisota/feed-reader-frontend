@@ -21,16 +21,34 @@ export default Vue.extend({
 					return newItem;
 				});
 		},
+		page() {
+			return this.$store.getters['feed/pageNumber'];
+		}
 	},
 	methods: {
 		loadFeed() {
 			this.$store.dispatch('feed/load');
 		},
+		save(index: number) {
+			this.$store.dispatch('feed/save', {
+				index: index
+			});
+		},
+		remove(index: number) {
+			this.$store.dispatch('feed/remove', {
+				index: index
+			});
+		},
 		next() {
-			console.log('Next');
+			this.$store.commit('feed/nextPage');
 		},
 		prev() {
-			console.log('Prev');
+			this.$store.commit('feed/prevPage');
+		}
+	},
+	watch: {
+		page() {
+			this.loadFeed();
 		}
 	}
 });

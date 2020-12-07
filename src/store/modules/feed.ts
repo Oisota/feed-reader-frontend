@@ -1,4 +1,4 @@
-import { MutationTree, ActionTree } from 'vuex';
+import { MutationTree, ActionTree, GetterTree } from 'vuex';
 import pick from 'lodash/pick';
 import { ResponsePromise } from 'ky';
 
@@ -17,23 +17,33 @@ export interface FeedItem {
 
 export interface State {
 	feed: Array<FeedItem>;
+	page: number,
 }
 
 export const namespaced = true;
 
 export const state: State = {
 	feed: [],
+	page: 0,
 };
 
 export const mutations: MutationTree<State> = {
 	load(state, payload) {
 		state.feed = payload.feed;
 	},
-	update(state, payload) {
-		state.feed.splice(payload.index, 1, payload.item);
+	save(state, payload) {
+		state.feed[payload.index].saved = true;
 	},
 	delete(state, payload) {
 		state.feed.splice(payload.index, 1);
+	},
+	nextPage(state) {
+		state.page += 1;
+	},
+	prevPage(state) {
+		if (state.page - 1 >= 0) {
+			state.page -= 1;
+		}
 	},
 };
 
@@ -41,7 +51,11 @@ export const actions: ActionTree<State, RootState> = {
 	async load(context): Promise<Response> {
 		let resp: Response = Response.error();
 		try {
-			resp = await http.get('posts');
+			resp = await http.get('posts', {
+				searchParams: {
+					page: context.state.page,
+				}
+			});
 		} catch (err) {
 			console.log(err);
 			return resp;
@@ -52,32 +66,32 @@ export const actions: ActionTree<State, RootState> = {
 		}
 		return resp;
 	},
-	async update(context, payload) {
+	async save(context, payload): Promise<Response> {
 		let resp = Response.error();
-		const userID = context.rootState.user.user.id;
-		const s = Object.assign({}, payload);
-		const data = pick(payload, [
-			'name', 'artist', 'album', 'genre', 'length'
-		]);
+		const post = context.state.feed[payload.index];
 		try {
-			resp = await http.put(`users/${userID}/songs/${payload.id}`, {
-				json: data,
-			});
+			resp = await http.put(`posts/${post.id}/save`);
 		} catch (err) {
 			console.log(err);
 		}
-		context.commit('update', s);
+		context.commit('save', payload);
 		return resp;
 	},
-	async delete(context, payload) {
+	async remove(context, payload): Promise<Response> {
 		let resp = Response.error();
-		const userID = context.rootState.user.user.id;
+		const post = context.state.feed[payload.index];
 		try {
-			resp = await http.delete(`users/${userID}/songs/${payload.id}`);
+			resp = await http.delete(`posts/${post.id}`);
 		} catch (err) {
 			console.log(err);
 		}
 		context.commit('delete', payload);
 		return resp;
 	},
+};
+
+export const  getters: GetterTree<State, RootState> = {
+	pageNumber(state): number {
+		return state.page + 1;
+	}
 };

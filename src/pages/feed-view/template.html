@@ -1,40 +1,42 @@
-<section class="container mx-auto">
+<section class="container mx-auto xl:w-1/2 md:w-3/4 sm:w-full">
 
-	<nav class="flex flex-row justify-between mt-2" role="navigation" aria-label="pagination">
-		<button v-on:click="prev" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Previous</button>
-		<button v-on:click="next" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Next</button>
+	<nav class="flex flex-row justify-between items-center mt-2" role="navigation" aria-label="pagination">
+		<span>Page {{page}}</span>
+		<span>
+			<button v-on:click="prev" class="mr-1 py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Previous</button>
+			<button v-on:click="next" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Next</button>
+		</span>
 	</nav>
 
-	<article v-for="item in feed" class="bg-white p-2 my-3 shadow rounded-md">
+	<article v-for="(item, index) in feed" class="bg-white p-2 my-3 shadow rounded-md">
 		<div class="flex flex-row justify-between">
 			<a v-bind:href="item.link" class="text-lg font-bold">{{item.title}}</a>
-			<p class="text-sm text-gray-700">{{item.pubDateFormatted}}</p>
+			<div class="flex flex-row justify-end items-center">
+				<button v-on:click="remove(index)" class="mx-1 py-1 px-2 text-sm text-red-500 font-light hover:text-white border-solid border border-red-500 hover:bg-red-500 rounded-full">
+					Delete
+				</button>
+				<button v-if="item.saved" class="mx-1 py-1 px-2 text-sm text-green-200 font-light border-solid border border-green-200 rounded-full" disabled>
+					Saved
+				</button>
+				<button v-else v-on:click="save(index)" class="mx-1 py-1 px-2 text-sm text-green-500 font-light hover:text-white border-solid border border-green-500 hover:bg-green-500 rounded-full">
+					Save
+				</button>
+			</div>
 		</div>
 		<a v-bind:href="item.feedLink" class="text-sm text-blue-800 inline-block hover:underline hover:text-blue-500">{{item.feedTitle}}</a>
+		<span>|</span>
+		<span class="text-sm text-gray-700">{{item.pubDateFormatted}}</span>
 
 		<div class="block mt-2" v-html="item.description"></div>
 
-		<div v-if="item.saved" class="flex flex-row justify-end items-center">
-			<button v-on:click="remove(item.id)" class="mx-1 py-1 px-2 text-sm text-red-500 font-light hover:text-white border-solid border border-red-500 hover:bg-red-500 rounded-full">
-				Delete
-			</button>
-			<button class="mx-1 py-1 px-2 text-sm text-green-500 font-light hover:text-white border-solid border border-green-500 hover:bg-green-500 rounded-full" disabled>
-				Saved
-			</button>
-		</div>
-		<div v-else class="flex flex-row justify-end items-center">
-			<button v-on:click="remove(item.id)" class="mx-1 py-1 px-2 text-sm text-red-500 font-light hover:text-white border-solid border border-red-500 hover:bg-red-500 rounded-full">
-				Delete
-			</button>
-			<button v-on:click="save(item.id)" class="mx-1 py-1 px-2 text-sm text-green-500 font-light hover:text-white border-solid border border-green-500 hover:bg-green-500 rounded-full">
-				Save
-			</button>
-		</div>
 	</article>
 
-	<nav class="flex flex-row justify-between mb-2" role="navigation" aria-label="pagination">
-		<button v-on:click="prev" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Previous</button>
-		<button v-on:click="next" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Next</button>
+	<nav class="flex flex-row justify-between pb-2" role="navigation" aria-label="pagination">
+		<span>Page {{page}}</span>
+		<span>
+			<button v-on:click="prev" class="mr-1 py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Previous</button>
+			<button v-on:click="next" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Next</button>
+		</span>
 	</nav>
 
 </section>
