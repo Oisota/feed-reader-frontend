@@ -1,12 +1,10 @@
 import { MutationTree, ActionTree } from 'vuex';
-import pick from 'lodash/pick';
-import { ResponsePromise } from 'ky';
 
 import { RootState } from '../state';
 import http from 'App/http';
 
 export interface Subscription {
-	id: number;
+	id: number | null;
 	url: string;
 }
 
@@ -24,8 +22,8 @@ export const mutations: MutationTree<State> = {
 	load(state, payload) {
 		state.subscriptions = payload.feeds;
 	},
-	update(state, payload) {
-		state.subscriptions.splice(payload.index, 1, payload.item);
+	add(state, payload) {
+		state.subscriptions.push({url: payload.url, id: null});
 	},
 	delete(state, payload) {
 		state.subscriptions.splice(payload.index, 1);
@@ -47,28 +45,27 @@ export const actions: ActionTree<State, RootState> = {
 		}
 		return resp;
 	},
-	async update(context, payload) {
+	async add(context, payload) {
 		let resp = Response.error();
-		const userID = context.rootState.user.user.id;
-		const s = Object.assign({}, payload);
-		const data = pick(payload, [
-			'name', 'artist', 'album', 'genre', 'length'
-		]);
+		const data = {
+			url: payload.url,
+		};
 		try {
-			resp = await http.put(`users/${userID}/songs/${payload.id}`, {
+			resp = await http.post('feeds', {
 				json: data,
 			});
 		} catch (err) {
 			console.log(err);
 		}
-		context.commit('update', s);
+		context.commit('add', {
+			url: payload.url,
+		});
 		return resp;
 	},
 	async delete(context, payload) {
 		let resp = Response.error();
-		const userID = context.rootState.user.user.id;
 		try {
-			resp = await http.delete(`users/${userID}/songs/${payload.id}`);
+			resp = await http.delete(`feeds/${payload.id}`);
 		} catch (err) {
 			console.log(err);
 		}

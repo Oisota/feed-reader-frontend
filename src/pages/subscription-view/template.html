@@ -3,7 +3,7 @@
 	<form v-on:submit.prevent="saveFeed" class="my-2">
 		<div class="flex flex-row">
 			<input v-model="feedUrl" class="px-4 py-1 mr-2 rounded-full flex-grow border focus:border-gray-600" type="text" placeholder="Enter A Valid Feed URL">
-			<button type="button" class="px-3 py-1 rounded-full text-green-400 border border-green-400 hover:bg-green-400 hover:text-white">
+			<button v-on:click="addFeed" type="button" class="px-3 py-1 rounded-full text-green-400 border border-green-400 hover:bg-green-400 hover:text-white">
 				Add
 			</button>
 		</div>
@@ -18,10 +18,10 @@
 				</tr>
 			</thead>
 			<tbody class="bg-gray-100">
-				<tr v-for="sub in subscriptions">
+				<tr v-for="(sub, index) in subscriptions">
 					<td class="border px-2 py-1">{{sub.url}}</td>
 					<td class="border px-2 py-1 text-center">
-						<button v-on:click="remove(sub.id)" class="py-1 px-2 text-sm text-red-500 border border-red-500 hover:bg-red-500 hover:text-white rounded-full">
+						<button v-on:click="remove(index)" class="py-1 px-2 text-sm text-red-500 border border-red-500 hover:bg-red-500 hover:text-white rounded-full">
 							Delete
 						</button>
 					</td>

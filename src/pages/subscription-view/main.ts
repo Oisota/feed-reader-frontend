@@ -19,11 +19,21 @@ export default Vue.extend({
 		loadData() {
 			this.$store.dispatch('subscriptions/load');
 		},
-		saveFeed() {
-			console.log('Saving');
+		addFeed() {
+			this.$store.dispatch('subscriptions/add', {
+				url: this.feedUrl,
+			})
+				.then(() => {
+					this.loadData();
+					this.feedUrl = '';
+				});
 		},
-		remove(id: number) {
-			console.log(`remove ${id}`)
+		remove(index: number) {
+			const feed = this.subscriptions[index];
+			this.$store.dispatch('subscriptions/delete', {
+				index: index,
+				id: feed.id,
+			});
 		}
 	}
 });
