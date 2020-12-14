@@ -6,13 +6,13 @@
 		<div class="flex flex-row justify-between">
 			<a v-bind:href="item.link" class="text-lg font-bold">{{item.title}}</a>
 			<div class="flex flex-row justify-end items-center">
-				<button v-on:click="remove(index)" class="mx-1 py-1 px-2 text-sm text-red-500 font-light hover:text-white border-solid border border-red-500 hover:bg-red-500 rounded-full">
+				<button v-on:click="remove(index)" class="mr-1 py-1 px-2 text-sm text-red-500 font-light hover:text-white border-solid border border-red-500 hover:bg-red-500 rounded-full">
 					Delete
 				</button>
-				<button v-if="item.saved" class="mx-1 py-1 px-2 text-sm text-green-200 font-light border-solid border border-green-200 rounded-full" disabled>
+				<button v-if="item.saved" class="py-1 px-2 text-sm text-white bg-green-500 font-light border-solid border border-green-500 rounded-full" disabled>
 					Saved
 				</button>
-				<button v-else v-on:click="save(index)" class="mx-1 py-1 px-2 text-sm text-green-500 font-light hover:text-white border-solid border border-green-500 hover:bg-green-500 rounded-full">
+				<button v-else v-on:click="save(index)" class="py-1 px-2 text-sm text-green-500 font-light hover:text-white border-solid border border-green-500 hover:bg-green-500 rounded-full">
 					Save
 				</button>
 			</div>
