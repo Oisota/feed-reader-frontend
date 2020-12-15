@@ -1,18 +1,21 @@
 <section class="flex flex-row justify-center mt-5">
-
-	<div class="p-5 bg-gray-100 border border-solid border-gray-600 rounded-lg w-1/4">
-		<h3 class="text-2xl text-bold mb-2">Login</h3>
-		<form v-on:submit.prevent="login">
-			<div class="py-2">
-				<label for="email" class="block mb-1">Email</label>
-				<input v-model="email" type="email" class="block py-1 px-2 rounded-lg border border-gray-500 focus:border-blue-400 focus:shadow w-full">
+	<x-card title="Login">
+		<template v-slot:body>
+			<form>
+				<div class="py-2">
+					<label for="email" class="block mb-1">Email</label>
+					<input v-model="email" type="email" class="block py-1 px-2 rounded-lg border border-gray-500 focus:border-blue-400 focus:shadow w-full">
+				</div>
+				<div class="py-2">
+					<label for="password" class="block mb-1">Password</label>
+					<input v-model="password" type="password" class="block py-1 px-2 rounded-lg border border-gray-500 focus:border-blue-400 focus:shadow w-full">
+				</div>
+			</form>
+		</template>
+		<template v-slot:footer>
+			<div class="flex flex-row justify-end">
+				<button v-on:click="login" type="button" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Login</button>
 			</div>
-			<div class="py-2">
-				<label for="password" class="block mb-1">Password</label>
-				<input v-model="password" type="password" class="block py-1 px-2 rounded-lg border border-gray-500 focus:border-blue-400 focus:shadow w-full">
-			</div>
-			<button type="submit" class="mt-3 py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Login</button>
-		</form>
-	</div>
-
+		</template>
+	</x-card>
 </section>

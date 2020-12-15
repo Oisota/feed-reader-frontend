@@ -1,7 +1,12 @@
 import Vue from 'vue';
 
+import Card from 'App/components/card';
+
 export default Vue.extend({
 	name: 'login-view',
+	components: {
+		'x-card': Card,
+	},
 	data() {
 		return {
 			email: '',
