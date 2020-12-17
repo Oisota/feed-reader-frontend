@@ -29,12 +29,16 @@ export const mutations: MutationTree<State> = {
 			return;
 		}
 		const user = JSON.parse(userStr);
+		state.user.id = user.id;
+		state.user.role = user.role;
 	},
 	setInfo(state, payload) {
 		state.user.id = payload.id;
 		state.user.role = Role[payload.role.name.toUpperCase() as string];
 	},
 	login(state, payload) {
+		state.user.id = payload.id;
+		state.user.role = Role.USER;
 		localStorage.setItem('user', JSON.stringify(state.user));
 	},
 	logout(state) {
@@ -58,7 +62,8 @@ export const actions: ActionTree<State, RootState> = {
 			console.log(err);
 			return;
 		}
-		const data = (await resp.json() as any).data;
+		const data = (await resp.json() as any);
+		console.log(data);
 		context.commit('login', data);
 		return resp;
 	},
@@ -71,22 +76,6 @@ export const actions: ActionTree<State, RootState> = {
 			return;
 		}
 		context.commit('logout');
-		return resp;
-	},
-	async load(context): Promise<Response> {
-		context.commit('load');
-		let resp = Response.error();
-		if (!context.getters.loggedIn) {
-			return resp;
-		}
-		try {
-			resp = await http.get('me');
-		} catch (err) {
-			console.log(err);
-			return resp;
-		}
-		const data = (await resp.json() as any).data;
-		context.commit('setInfo', data);
 		return resp;
 	},
 	async register(_, payload): Promise<Response> {

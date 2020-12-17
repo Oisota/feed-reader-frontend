@@ -1,7 +1,7 @@
 <section class="flex flex-row justify-center mt-5">
 	<x-card title="Login">
 		<template v-slot:body>
-			<form>
+			<form v-on:keyup.enter="login">
 				<div class="py-2">
 					<label for="email" class="block mb-1">Email</label>
 					<input v-model="email" type="email" class="block py-1 px-2 rounded-lg border border-gray-500 focus:border-blue-400 focus:shadow w-full">

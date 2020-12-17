@@ -22,7 +22,6 @@ export default Vue.extend({
 					email: this.email,
 					password: this.password,
 				});
-				await this.$store.dispatch('user/load');
 			} catch (err) {
 				console.log(err);
 			}

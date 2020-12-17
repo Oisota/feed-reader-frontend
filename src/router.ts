@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-//import store from './store';
+import store from './store';
 import pages from './pages';
 import { Role } from 'App/util';
 
@@ -51,8 +51,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from_, next) => {
 	document.title = `Feed Reader | ${to.meta.title}`;
-	next();
-	/*
 	const loggedIn = store.getters['user/loggedIn'];
 	const hasRole = store.state.user.user.role <= to.meta.role;
 	if (!loggedIn && to.name !== 'login' && !hasRole) {
@@ -60,7 +58,6 @@ router.beforeEach((to, from_, next) => {
 	} else {
 		next();
 	}
-	*/
 });
 
 export default router;
