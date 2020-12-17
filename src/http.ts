@@ -2,17 +2,8 @@ import Vue from 'vue';
 import ky from 'ky';
 import {Options} from 'ky';
 
-import store from './store';
-
 interface CustomKyOptions extends Options {
 	handleError: boolean;
-}
-
-function addAuth(req: Request) {
-	const token = store.state.user.user.token;
-	if (token !== null || typeof token !== 'undefined') {
-		req.headers.set('Authorization', `Bearer ${token}`);
-	}
 }
 
 async function showNotifications(_: Request, opts: any, res: Response) {
@@ -40,7 +31,6 @@ const opts: CustomKyOptions = {
 	prefixUrl: `${window.location.origin}/api/v1`,
 	handleError: true,
 	hooks: {
-		beforeRequest: [addAuth],
 		afterResponse: [showNotifications]
 	},
 };

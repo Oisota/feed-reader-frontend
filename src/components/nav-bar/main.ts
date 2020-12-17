@@ -10,8 +10,8 @@ export default Vue.extend({
 		}
 	},
 	methods: {
-		logout() {
-			this.$store.commit('user/logout');
+		async logout() {
+			await this.$store.dispatch('user/logout');
 			this.$router.push({name: 'login'});
 		},
 		hasRole(role: string) {
