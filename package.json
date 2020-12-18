@@ -2,8 +2,8 @@
 	"name": "feed-reader",
 	"version": "0.1.0",
 	"description": "RSS Feed Reader",
-	"repository": "https://github.com/Oisota/feed-reader",
 	"main": "./src/index.js",
+	"repository": "https://github.com/Oisota/feed-reader-frontend",
 	"scripts": {
 		"start": "webpack serve --config webpack.dev.js",
 		"build": "webpack --config=webpack.prod.js",
