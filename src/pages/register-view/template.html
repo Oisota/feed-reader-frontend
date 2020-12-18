@@ -1,5 +1,5 @@
 <section class="flex flex-row justify-center mt-5">
-	<x-card title="Login">
+	<x-card title="Register">
 		<template v-slot:body>
 			<form v-on:keyup.enter="login">
 				<div class="py-2">
@@ -14,10 +14,7 @@
 		</template>
 		<template v-slot:footer>
 			<div class="flex flex-row justify-end">
-				<button v-on:click="login" type="button" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Login</button>
-			</div>
-			<div class="flex flex-row justify-center">
-				<router-link class="text-blue-600 mt-3 hover:text-blue-400 hover:underline" v-bind:to="{name: 'register'}">Create Account</router-link>
+				<button v-on:click="register" type="button" class="py-1 px-2 text-blue-500 font-light hover:text-white border-solid border border-blue-500 hover:bg-blue-500 rounded-full">Register</button>
 			</div>
 		</template>
 	</x-card>

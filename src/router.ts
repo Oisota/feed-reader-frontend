@@ -38,6 +38,15 @@ const router = new VueRouter({
 			}
 		},
 		{
+			path: '/register',
+			name: 'register',
+			component: pages.RegisterView,
+			meta: {
+				title: 'Register',
+				role: Role.ANY,
+			}
+		},
+		{
 			path: '*',
 			name: 'not-found',
 			component: pages.NotFoundView,

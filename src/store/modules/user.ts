@@ -81,7 +81,7 @@ export const actions: ActionTree<State, RootState> = {
 	async register(_, payload): Promise<Response> {
 		let resp = Response.error();
 		try {
-			resp = await http.post('register', {
+			resp = await http.post('auth/register', {
 				json: {
 					email: payload.email,
 					password: payload.password
