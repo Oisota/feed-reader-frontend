@@ -1,3 +1,3 @@
-Song Manager Frontend
+Feed Reader Frontend
 =====================
-This is the frontend code for the Song Manager API.
+Front-end app for the feed reader backend
