@@ -10,7 +10,7 @@ export default Vue.extend({
 		},
 	},
 	computed: {
-		formattedDate(): string {
+		pubDate(): string {
 			return format(this.item.pubDate, "MMM do yyy 'at' h:mm aaa");
 		}
 	},

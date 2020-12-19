@@ -17,7 +17,7 @@
 	<div class="flex flex-row justify-start items-center pb-2 border-b border-gray-300">
 		<a v-bind:href="item.feedLink" class="text-sm text-blue-800 inline-block hover:underline hover:text-blue-500">{{item.feedTitle}}</a>
 		<span class="mx-1">|</span>
-		<span class="text-sm text-gray-700">{{item.pubDateFormatted}}</span>
+		<span class="text-sm text-gray-700">{{pubDate}}</span>
 	</div>
 
 	<div class="block prose max-w-none mt-2" v-html="item.description"></div>
