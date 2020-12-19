@@ -1,6 +1,4 @@
 import { MutationTree, ActionTree, GetterTree } from 'vuex';
-import pick from 'lodash/pick';
-import { ResponsePromise } from 'ky';
 
 import { RootState } from '../state';
 import http from 'App/http';
@@ -62,7 +60,12 @@ export const actions: ActionTree<State, RootState> = {
 		}
 		const data: any = await resp.json();
 		if (data && data.data) {
-			context.commit('load', { feed: data.data});
+			const feed = data.data
+				.map((f: any) => {
+					f.pubDate = new Date(f.pubDate * 1000);
+					return f;
+				});
+			context.commit('load', { feed });
 		}
 		return resp;
 	},

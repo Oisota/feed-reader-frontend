@@ -22,7 +22,7 @@ export default Vue.extend({
 			return this.$store.state.feed.feed
 				.map((item: FeedItem): FormattedFeedItem => {
 					const newItem: FormattedFeedItem = (Object.assign({}, item) as FormattedFeedItem);
-					newItem.pubDateFormatted = format(item.pubDate, "MMM do 'at' h:mm aaa");
+					newItem.pubDateFormatted = format(item.pubDate, "MMM do yyy 'at' h:mm aaa");
 					return newItem;
 				});
 		},
