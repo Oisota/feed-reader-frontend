@@ -1,32 +1,22 @@
 import Vue from 'vue';
-import format from 'date-fns/format';
 
 import { FeedItem } from 'App/store/modules/feed';
-
 import PageNav from 'App/components/page-nav';
-
-interface FormattedFeedItem extends FeedItem {
-	pubDateFormatted: string;
-};
+import PostItem from 'App/components/post-item';
 
 export default Vue.extend({
 	name: 'feed-view',
 	components: {
 		'page-nav': PageNav,
-	},
-	created() {
+		'post-item': PostItem,
+	}, created() {
 		this.loadFeed();
 	},
 	computed: {
-		feed() {
-			return this.$store.state.feed.feed
-				.map((item: FeedItem): FormattedFeedItem => {
-					const newItem: FormattedFeedItem = (Object.assign({}, item) as FormattedFeedItem);
-					newItem.pubDateFormatted = format(item.pubDate, "MMM do yyy 'at' h:mm aaa");
-					return newItem;
-				});
+		feed(): Array<FeedItem> {
+			return this.$store.state.feed.feed;
 		},
-		page() {
+		page(): string {
 			return this.$store.getters['feed/pageNumber'];
 		}
 	},

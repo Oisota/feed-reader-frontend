@@ -1,0 +1,25 @@
+<article class="bg-white p-2 my-3 shadow rounded-md">
+	<div class="flex flex-row justify-between">
+		<a v-bind:href="item.url" class="text-lg font-bold">{{item.title}}</a>
+		<div class="flex flex-row justify-end items-center">
+			<button v-on:click="remove" class="mr-1 py-1 px-2 text-sm text-red-500 font-light hover:text-white border-solid border border-red-500 hover:bg-red-500 rounded-full">
+				Delete
+			</button>
+			<button v-if="item.saved" class="py-1 px-2 text-sm text-white bg-green-500 font-light border-solid border border-green-500 rounded-full" disabled>
+				Saved
+			</button>
+			<button v-else v-on:click="save" class="py-1 px-2 text-sm text-green-500 font-light hover:text-white border-solid border border-green-500 hover:bg-green-500 rounded-full">
+				Save
+			</button>
+		</div>
+	</div>
+
+	<div class="flex flex-row justify-start items-center pb-2 border-b border-gray-300">
+		<a v-bind:href="item.feedLink" class="text-sm text-blue-800 inline-block hover:underline hover:text-blue-500">{{item.feedTitle}}</a>
+		<span class="mx-1">|</span>
+		<span class="text-sm text-gray-700">{{item.pubDateFormatted}}</span>
+	</div>
+
+	<div class="block prose max-w-none mt-2" v-html="item.description"></div>
+
+</article>
