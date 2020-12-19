@@ -1,6 +1,6 @@
 <section class="container mx-auto">
 
-	<form v-on:submit.prevent="saveFeed" class="my-2">
+	<form v-on:submit.prevent="addFeed" class="my-2">
 		<div class="flex flex-row">
 			<input v-model="feedUrl" class="px-4 py-1 mr-2 rounded-full flex-grow border focus:border-gray-600" type="text" placeholder="Enter A Valid Feed URL">
 			<button v-on:click="addFeed" type="button" class="px-3 py-1 rounded-full text-green-400 border border-green-400 hover:bg-green-400 hover:text-white">
