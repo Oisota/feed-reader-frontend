@@ -33,8 +33,9 @@ export const mutations: MutationTree<State> = {
 export const actions: ActionTree<State, RootState> = {
 	async load(context): Promise<Response> {
 		let resp: Response = Response.error();
+		const userId = context.rootState.user.user.id;
 		try {
-			resp = await http.get('feeds');
+			resp = await http.get(`users/${userId}/feeds`);
 		} catch (err) {
 			console.log(err);
 			return resp;
@@ -47,11 +48,12 @@ export const actions: ActionTree<State, RootState> = {
 	},
 	async add(context, payload) {
 		let resp = Response.error();
+		const userId = context.rootState.user.user.id;
 		const data = {
 			url: payload.url,
 		};
 		try {
-			resp = await http.post('feeds', {
+			resp = await http.post(`users/${userId}/feeds`, {
 				json: data,
 			});
 		} catch (err) {
@@ -64,8 +66,9 @@ export const actions: ActionTree<State, RootState> = {
 	},
 	async delete(context, payload) {
 		let resp = Response.error();
+		const userId = context.rootState.user.user.id;
 		try {
-			resp = await http.delete(`feeds/${payload.id}`);
+			resp = await http.delete(`users/${userId}/feeds/${payload.id}`);
 		} catch (err) {
 			console.log(err);
 		}

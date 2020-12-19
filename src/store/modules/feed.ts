@@ -48,8 +48,9 @@ export const mutations: MutationTree<State> = {
 export const actions: ActionTree<State, RootState> = {
 	async load(context): Promise<Response> {
 		let resp: Response = Response.error();
+		const userId = context.rootState.user.user.id;
 		try {
-			resp = await http.get('posts', {
+			resp = await http.get(`users/${userId}/posts`, {
 				searchParams: {
 					page: context.state.page,
 				}
@@ -72,8 +73,9 @@ export const actions: ActionTree<State, RootState> = {
 	async save(context, payload): Promise<Response> {
 		let resp = Response.error();
 		const post = context.state.feed[payload.index];
+		const userId = context.rootState.user.user.id;
 		try {
-			resp = await http.put(`posts/${post.id}/save`);
+			resp = await http.put(`users/${userId}/posts/${post.id}/save`);
 		} catch (err) {
 			console.log(err);
 		}
@@ -83,8 +85,9 @@ export const actions: ActionTree<State, RootState> = {
 	async remove(context, payload): Promise<Response> {
 		let resp = Response.error();
 		const post = context.state.feed[payload.index];
+		const userId = context.rootState.user.user.id;
 		try {
-			resp = await http.delete(`posts/${post.id}`);
+			resp = await http.delete(`users/${userId}/posts/${post.id}`);
 		} catch (err) {
 			console.log(err);
 		}
