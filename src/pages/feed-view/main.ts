@@ -22,7 +22,10 @@ export default Vue.extend({
 	},
 	methods: {
 		loadFeed() {
-			this.$store.dispatch('feed/load');
+			this.$store.dispatch('feed/load')
+				.then(() => {
+					window.scrollTo(0, 0);
+				});
 		},
 		save(index: number) {
 			this.$store.dispatch('feed/save', {
