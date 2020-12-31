@@ -20,6 +20,15 @@ const router = new VueRouter({
 			}
 		},
 		{
+			path: '/saved-posts',
+			name: 'saved-posts',
+			component: pages.SavedView,
+			meta: {
+				title: 'Saved Posts',
+				role: Role.USER,
+			}
+		},
+		{
 			path: '/subscriptions',
 			name: 'subscriptions',
 			component: pages.SubscriptionView,

@@ -1,0 +1,22 @@
+<section class="container mx-auto xl:w-1/2 md:w-3/4 sm:w-full">
+
+	<page-nav
+		v-bind:page="page"
+		v-on:next="next"
+		v-on:prev="prev">
+	</page-nav>
+
+	<post-item
+		v-for="(item, index) in feed"
+		v-bind:key="item.id"
+		v-bind:item="item"
+		v-on:remove="remove(index)">
+	</post-item>
+
+	<page-nav
+		v-bind:page="page"
+		v-on:next="next"
+		v-on:prev="prev">
+	</page-nav>
+
+</section>
